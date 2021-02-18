@@ -5,6 +5,7 @@ $(document).ready(function () {
     currentWeather(cityName);
   });
 
+  // CURRENT WEATHER
   function currentWeather(cityName) {
     const APIKey = "d3d059dd73667f9df01c09fb652df11b";
 
@@ -35,8 +36,45 @@ $(document).ready(function () {
         cardBody.append(titleEl, tempEl, humidityEl, windEl);
         cardEl.append(cardBody);
         $("#current").append(cardEl);
+
+        weekForecast(cityName);
       });
   };
+
+  // WEEK FORECAST
+  function weekForecast(cityName) {
+    const APIKey = "d3d059dd73667f9df01c09fb652df11b";
+
+    $.ajax(
+      {
+        type: "GET",
+        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey,
+      })
+      .then(function (data) {
+        $("#week").empty();
+
+        const weekTitle = $("<div>").html("<h4>5-Day Forecast:</h4>");
+        const titleDiv = $("<div>").addClass("row");
+        weekTitle.append(titleDiv);
+        $("#week").append(weekTitle);
+
+        for (var i = 0; i < data.list.length; i++) {
+          if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+            const titleEl = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
+            const iconEl = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+            const tempEl = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp_max + " °F");
+            const humidityEl = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
+
+            const colEl = $("<div>").addClass("col-md-2");
+            const cardEl = $("<div>").addClass("card bg-primary text-white");
+            const cardBody = $("<div>").addClass("card-body p-2");
+
+            colEl.append(cardEl.append(cardBody.append(titleEl, iconEl, tempEl, humidityEl)));
+            $("#week .row").append(colEl);
+          }
+        }
+      });
+  }
 
   //  HISTORY AND LOCAL STORAGE
   $(".history").on("click", "li", function () {
