@@ -24,9 +24,11 @@ $(document).ready(function () {
 
         $("#current").empty();
 
+        const tempF = (data.main.temp - 273.15) * 1.80 + 32;
+
         const windEl = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
         const humidityEl = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%");
-        const tempEl = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + " °F");
+        const tempEl = $("<p>").addClass("card-text").text("Temperature: " + tempF.toFixed(2) + " °F");
         const iconEl = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
         const titleEl = $("<h3>").addClass("card-title").text(data.name + " (" + new Date().toLocaleDateString() + ")");
         const cardBody = $("<div>").addClass("card-body");
@@ -45,6 +47,7 @@ $(document).ready(function () {
   function weekForecast(cityName) {
     const APIKey = "d3d059dd73667f9df01c09fb652df11b";
 
+
     $.ajax(
       {
         type: "GET",
@@ -60,9 +63,10 @@ $(document).ready(function () {
 
         for (var i = 0; i < data.list.length; i++) {
           if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+            const tempF = (data.list[i].main.temp_max - 273.15) * 1.80 + 32;
             const titleEl = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
             const iconEl = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
-            const tempEl = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp_max + " °F");
+            const tempEl = $("<p>").addClass("card-text").text("Temp: " + tempF.toFixed(2) + " °F");
             const humidityEl = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
 
             const colEl = $("<div>").addClass("col-md-2");
