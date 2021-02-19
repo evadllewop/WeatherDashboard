@@ -5,6 +5,11 @@ $(document).ready(function () {
     currentWeather(cityName);
   });
 
+  function searchHistory(city) {
+    const li = $("<li>").addClass("list-group-item list-group-item-action").text(city);
+    $(".history").append(li);
+  }
+
   // CURRENT WEATHER
   function currentWeather(cityName) {
     const APIKey = "d3d059dd73667f9df01c09fb652df11b";
@@ -47,7 +52,6 @@ $(document).ready(function () {
   function weekForecast(cityName) {
     const APIKey = "d3d059dd73667f9df01c09fb652df11b";
 
-
     $.ajax(
       {
         type: "GET",
@@ -85,10 +89,7 @@ $(document).ready(function () {
     currentWeather($(this).text());
   });
 
-  function searchHistory(str) {
-    const li = $("<li>").addClass("list-group-item list-group-item-action").text(str);
-    $(".history").append(li);
-  }
+
 
   var history = JSON.parse(window.localStorage.getItem("history")) || [];
 
