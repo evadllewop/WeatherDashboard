@@ -17,7 +17,7 @@ $(document).ready(function () {
     $.ajax(
       {
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey,
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey,
       })
       .then(function (data) {
 
@@ -76,7 +76,7 @@ $(document).ready(function () {
     $.ajax(
       {
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey,
+        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey,
       })
       .then(function (data) {
         $("#week").empty();
