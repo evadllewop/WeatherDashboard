@@ -34,7 +34,7 @@ $(document).ready(function () {
         const windEl = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
         const humidityEl = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%");
         const tempEl = $("<p>").addClass("card-text").text("Temperature: " + tempF.toFixed(2) + " °F");
-        const iconEl = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+        const iconEl = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
 
         const titleEl = $("<h3>").addClass("card-title").text(data.name + " (" + new Date().toLocaleDateString() + ")");
         const cardEl = $("<div>").addClass("card");
