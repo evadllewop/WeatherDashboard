@@ -50,7 +50,7 @@ $(document).ready(function () {
 
         const clearRow = $("<div>").addClass("row");
         const clearDiv = $("<div>").addClass("col-md-8");
-        const clearBtn = $("<button>").text("Clear").addClass("btn btn-primary");
+        const clearBtn = $("<br><button>").text("Clear").addClass("btn btn-primary");
 
         clearBtn.append(clearDiv);
         clearDiv.append(clearRow);
